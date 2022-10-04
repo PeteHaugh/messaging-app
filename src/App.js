@@ -1,20 +1,19 @@
 import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
+import AppLayout from "./components/AppLayout";
 
 function App() {
   return (
     <div className="app">
       <Routes>
-        <>
-        <Route index element={<Header />} />
-          
-          <Route path="/" element={<></>}></Route>
-        </>
+        <Route element={<AppLayout/>}>
+          <Route path="/" exact element={<></>}></Route>
+        </Route>
       </Routes>
     </div>
   );
 }
 
 export default App;
+
