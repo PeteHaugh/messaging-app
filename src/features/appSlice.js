@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const appSlice = createSlice({
-  name: "counter",
+  name: "app",
   initialState: {
     roomId: null,
   },
