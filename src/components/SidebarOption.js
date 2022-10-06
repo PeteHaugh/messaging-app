@@ -26,7 +26,6 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
       );
     }
   };
-
   return (
     <SidebarOptionContainer
       onClick={addChannelOption ? addChannel : selectChannel}

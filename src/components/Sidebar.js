@@ -3,8 +3,8 @@ import styled from "styled-components";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import CreateIcon from "@mui/icons-material/Create";
 import SidebarOption from "./SidebarOption";
-import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../firebase';
+import { useCollection } from "react-firebase-hooks/firestore";
+import { db } from "../firebase";
 import {
   InsertComment,
   Inbox,

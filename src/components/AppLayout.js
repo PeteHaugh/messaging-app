@@ -10,9 +10,7 @@ function AppLayout() {
       <Header />
       <AppBody>
         <Sidebar />
-        <AppBody>
           <Outlet />
-        </AppBody>
       </AppBody>
     </>
   );
