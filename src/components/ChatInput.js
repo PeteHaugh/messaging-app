@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function ChatInput({ channelId, channelName, chatRef }) {
   const [input, setInput] = useState("");
+  const [user, loading] = useAuthState(auth);
 
   const sendMessage = (e) => {
     if (e.defaultPrevented) return; // Exits here if event has been handled
@@ -15,8 +17,8 @@ function ChatInput({ channelId, channelName, chatRef }) {
     db.collection("rooms").doc(channelId).collection("messages").add({
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      user: "Pete",
-      userImage: "",
+      user: user.displayName,
+      userImage: user.photoURL,
     });
 
     chatRef.current.scrollIntoView({

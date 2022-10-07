@@ -4,7 +4,8 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import CreateIcon from "@mui/icons-material/Create";
 import SidebarOption from "./SidebarOption";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   InsertComment,
   Inbox,
@@ -17,8 +18,11 @@ import {
   Add,
 } from "@mui/icons-material";
 
+
+
 function Sidebar() {
-  const [channels, loading, error] = useCollection(db.collection("rooms"));
+  const [channels] = useCollection(db.collection("rooms"));
+  const [user] = useAuthState(auth);
 
   return (
     <SidebarContainer>
@@ -27,7 +31,7 @@ function Sidebar() {
           <h2>Message HQ</h2>
           <h3>
             <FiberManualRecordIcon />
-            Pete Haugh
+            {user?.displayName}
           </h3>
         </SidebarInfo>
         <CreateIcon />

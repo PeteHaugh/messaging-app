@@ -3,14 +3,18 @@ import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 function Header() {
+  const [user] = useAuthState(auth);
+
   return (
     <HeaderContainer>
       {/* Nav */}
       <HeaderLeft>
-        <HeaderAvatar />
+        <HeaderAvatar onClick={() => auth.signOut()} src={user?.photoURL} alt={user?.displayName} />
         <AccessTimeIcon />
       </HeaderLeft>
 
@@ -31,24 +35,24 @@ function Header() {
 export default Header;
 
 const HeaderSearch = styled.div`
-    flex: 0.4;
-    opacity: 1;
-    border-radius: 6px;
-    background-color: #161618;
-    text-align: center;
-    display: flex;
-    padding: 0 50px;
-    color: gray;
-    border: 1px gray solid;
+  flex: 0.4;
+  opacity: 1;
+  border-radius: 6px;
+  background-color: #161618;
+  text-align: center;
+  display: flex;
+  padding: 0 50px;
+  color: gray;
+  border: 1px gray solid;
 
-    > input {
-        background-color: transparent;
-        border: none;
-        text-align: center;
-        min-width: 30vw;
-        outline: 0;
-        color: white;
-    }
+  > input {
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    min-width: 30vw;
+    outline: 0;
+    color: white;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -82,12 +86,12 @@ const HeaderAvatar = styled(Avatar)`
 `;
 
 const HeaderRight = styled.div`
-    flex: 0.3;
-    display: flex;
-    align-items: flex-end;
+  flex: 0.3;
+  display: flex;
+  align-items: flex-end;
 
-    > .MuiSvgIcon-root {
-        margin-left: auto;
-        margin-right: 20px;
-    }
+  > .MuiSvgIcon-root {
+    margin-left: auto;
+    margin-right: 20px;
+  }
 `;

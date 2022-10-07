@@ -32,44 +32,61 @@ function Chat() {
 
   return (
     <ChatContainer>
-      {roomDetails && roomMessages && (
-        <>
-          <Header>
-            <HeaderLeft>
-              <h4>
-                <strong>#{roomDetails?.data().name}</strong>
-              </h4>
-              <StarBorderOutlined />
-            </HeaderLeft>
+      {roomId ? (
+        roomDetails &&
+        roomMessages && (
+          <>
+            <Header>
+              <HeaderLeft>
+                <h4>
+                  <strong>#{roomDetails?.data().name}</strong>
+                </h4>
+                <StarBorderOutlined />
+              </HeaderLeft>
 
-            <HeaderRight>
-              <p>
-                <InfoOutlined /> Details
-              </p>
-            </HeaderRight>
-          </Header>
-          <ChatMessages>
-            {roomMessages?.docs.map((doc) => {
-              const { message, timestamp, user, userImage } = doc.data();
+              <HeaderRight>
+                <p>
+                  <InfoOutlined /> Details
+                </p>
+              </HeaderRight>
+            </Header>
+            <ChatMessages>
+              {roomMessages?.docs.map((doc) => {
+                const { message, timestamp, user, userImage } = doc.data();
 
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timestamp={timestamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
-            })}
-            <ChatBottom ref={chatRef} />
-          </ChatMessages>
-          <ChatInput
-            chatRef={chatRef}
-            channelId={roomId}
-            channelName={roomDetails?.data().name}
-          />
-        </>
+                return (
+                  <Message
+                    key={doc.id}
+                    message={message}
+                    timestamp={timestamp}
+                    user={user}
+                    userImage={userImage}
+                  />
+                );
+              })}
+              <ChatBottom ref={chatRef} />
+            </ChatMessages>
+            <ChatInput
+              chatRef={chatRef}
+              channelId={roomId}
+              channelName={roomDetails?.data().name}
+            />
+          </>
+        )
+      ) : (
+        <Header>
+          <HeaderLeft>
+            <h3>
+              <strong>Select a room!</strong>
+            </h3>
+          </HeaderLeft>
+
+          <HeaderRight>
+            <p>
+              <InfoOutlined /> Details
+            </p>
+          </HeaderRight>
+        </Header>
       )}
     </ChatContainer>
   );
