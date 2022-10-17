@@ -15,12 +15,9 @@ function App() {
     return (
       <AppLoading>
         <AppLoadingContents>
-          <img
-            src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
-            alt=""
-          />
+          <img src="https://i.ibb.co/VwBSTsQ/discord.png" alt="" />
 
-          <Spinner name="ball-spin-fade-loader" color="green" fadeIn="none" />
+          <Spinner name="cube-grid" color="#202225" fadeIn="none" size/>
         </AppLoadingContents>
       </AppLoading>
     );
@@ -48,19 +45,27 @@ const AppLoading = styled.div`
   place-items: center;
   height: 100vh;
   width: 100%;
+  background-color: #36393f;
 `;
 
 const AppLoadingContents = styled.div`
   text-align: center;
-  padding-bottom: 100px;
+  padding: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #2f3136;
+  border-radius: 10%;
 
   > img {
     height: 100px;
     padding: 20px;
     margin-bottom: 40px;
   }
+
+  .sk-cube-grid {
+    width: 50px;
+    height: 50px;
+}
 `;

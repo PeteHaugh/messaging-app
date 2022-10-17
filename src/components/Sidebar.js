@@ -24,7 +24,7 @@ function Sidebar() {
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>Pete's Chatroom!</h2>
+          <h2>Pete's Chatroom.</h2>
           <h3>
             <FiberManualRecord />
             {user?.displayName}

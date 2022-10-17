@@ -14,12 +14,11 @@ function Login() {
     <LoginContainer>
       <LoginInnerContainer>
         <img
-          src="https://cdn.mos.cms.futurecdn.net/SDDw7CnuoUGax6x9mTo7dd.jpg"
+          src="https://i.ibb.co/VwBSTsQ/discord.png"
           alt=""
         />
-        <h1>Sign in to Slack</h1>
-        <p>pete.slack.com</p>
-
+        <h1>Sign in to Discord</h1>
+        <p>pete.discord.com</p>
         <Button onClick={signIn}>Sign in with Google</Button>
       </LoginInnerContainer>
     </LoginContainer>
@@ -29,7 +28,7 @@ function Login() {
 export default Login;
 
 const LoginContainer = styled.div`
-  background-color: whitesmoke;
+  background-color: #36393f;
   height: 100vh;
   display: grid;
   place-items: center;
@@ -38,9 +37,10 @@ const LoginContainer = styled.div`
 const LoginInnerContainer = styled.div`
   padding: 100px;
   text-align: center;
-  background: white;
+  background: #2f3136;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  color: white;
 
   > img {
     object-fit: contain;
@@ -51,11 +51,12 @@ const LoginInnerContainer = styled.div`
   > button {
     margin-top: 50px;
     text-transform: inherit;
-    background-color: #0a8d48;
+    background-color: #42464D;
     color: white;
+    padding: 10px;
   }
 
   > button:hover { 
-    background-color: darkgreen;
+    background-color: #202225;
   }
 `;
