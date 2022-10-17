@@ -54,6 +54,7 @@ const SidebarOptionContainer = styled.div`
   align-items: center;
   padding-left: 2px;
   cursor: pointer;
+  padding-right: 10px;
 
   :hover {
     opacity: 0.9;
@@ -67,6 +68,19 @@ const SidebarOptionContainer = styled.div`
   > h3 > span {
     padding-right: 5px;
     padding-left: 30px;
+  }
+  @media screen and (max-width: 1024px) {
+    > h3 > .MuiSvgIcon-root {
+      font-size: 7px;
+    }
+
+    > h2 {
+      font-size: 0.8rem;
+    }
+
+    > h3 {
+      font-size: 0.8rem;
+    }
   }
 `;
 

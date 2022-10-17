@@ -112,6 +112,15 @@ const ChatContainer = styled.div`
   overflow-y: scroll;
   background-color: #36393f;
   color: #dddedf;
+
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    flex: 1;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    z-index: 1;
+  }
+
   ::-webkit-scrollbar {
     background-color: gray;
   }

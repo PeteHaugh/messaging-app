@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import CreateIcon from "@mui/icons-material/Create";
 import SidebarOption from "./SidebarOption";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { db, auth } from "../firebase";
@@ -13,6 +12,8 @@ import {
   CellTower,
   FiberManualRecord,
   Settings,
+  NavigateBefore,
+  NavigateNext
 } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 
@@ -20,8 +21,21 @@ function Sidebar() {
   const [channels] = useCollection(db.collection("rooms"));
   const [user] = useAuthState(auth);
 
+  const [open, setOpen] = useState(true);
+
+  const toggle = () => {
+    setOpen(!open);
+  };
+
   return (
-    <SidebarContainer>
+    <SidebarContainer open={open}>
+      <TabOpen>
+        {!open ? (
+          <NavigateNext onClick={() => toggle()} />
+        ) : (
+          <NavigateBefore onClick={() => toggle()} />
+        )}
+      </TabOpen>
       <SidebarHeader>
         <SidebarInfo>
           <h2>Pete's Chatroom.</h2>
@@ -63,6 +77,22 @@ function Sidebar() {
 
 export default Sidebar;
 
+const TabOpen = styled.div`
+  @media screen and (max-width: 600px) {
+    position: absolute;
+    top: 40%;
+    left: 140px;
+    background-color: #2f3136;
+    border-radius: 25%;
+    display: flex;
+    padding-left: 10px;
+    height: 50px;
+    align-items: center;
+    z-index: 3;
+  }
+  display: none;
+`;
+
 const SidebarContainer = styled.div`
   background-color: #2f3136;
   color: white;
@@ -71,12 +101,23 @@ const SidebarContainer = styled.div`
   margin-top: -61px;
   max-height: 100vh;
   position: relative;
-  min-width: 100px;
+  min-width: 150px;
+  z-index: 999;
 
   > hr {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid #26282c;
+  }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.8rem;
+    transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
+    margin-top: 0;
   }
 `;
 
@@ -95,6 +136,12 @@ const SidebarHeader = styled.div`
     padding: 8px;
     color: #b8babd;
     font-size: 32px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    > .MuiSvgIcon-root {
+      font-size: 24px;
+    }
   }
 `;
 
@@ -119,6 +166,20 @@ const SidebarInfo = styled.div`
     margin-top: 1px;
     margin-right: 2px;
     color: green;
+  }
+
+  @media screen and (max-width: 1024px) {
+    > h3 > .MuiSvgIcon-root {
+      font-size: 7px;
+    }
+
+    > h2 {
+      font-size: 0.8rem;
+    }
+
+    > h3 {
+      font-size: 0.8rem;
+    }
   }
 `;
 

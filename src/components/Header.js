@@ -8,6 +8,8 @@ import {
   PeopleAlt,
   PushPin,
   NotificationsOff,
+  Menu,
+  Close,
 } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -23,10 +25,11 @@ function Header() {
   const [roomDetails] = useDocument(
     roomId && db.collection("rooms").doc(roomId)
   );
+ 
 
   return (
     <HeaderLayout>
-      <Spacer>Secret</Spacer>
+      <Spacer></Spacer>
       <HeaderContainer>
         {/* Nav */}
         <HeaderLeft>
@@ -75,7 +78,13 @@ const HeaderLayout = styled.div`
 const Spacer = styled.div`
   flex: 0.3;
   max-width: 260px;
-  min-width: 100px;
+  min-width: 150px;
+
+  @media screen and (max-width: 600px) {
+    min-width: 0;
+    width: 0;
+    flex: 0;
+  }
 `;
 
 const HeaderSearch = styled.div`
@@ -106,10 +115,10 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
-  background-color: #36393F;
+  background-color: #36393f;
   color: white;
   z-index: 1;
-  border-bottom: 1px solid #2E3036;
+  border-bottom: 1px solid #2e3036;
 `;
 
 const HeaderLeft = styled.div`
@@ -124,10 +133,10 @@ const HeaderLeft = styled.div`
     text-overflow: ellipsis;
   }
 
-  > .MuiSvgIcon-root {
-    margin-left: auto;
-    margin-right: 30px;
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
   }
+
 `;
 
 const HeaderAvatar = styled(Avatar)`
@@ -147,10 +156,16 @@ const HeaderRight = styled.div`
     margin-left: auto;
     padding-left: 5px;
     padding-right: 5px;
-    color: #B8BABD;
+    color: #b8babd;
 
     &:hover {
       color: whitesmoke;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    > .MuiSvgIcon-root {
+      display: none;
     }
   }
 `;

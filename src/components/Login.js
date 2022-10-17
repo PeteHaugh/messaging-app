@@ -35,7 +35,7 @@ const LoginContainer = styled.div`
 `;
 
 const LoginInnerContainer = styled.div`
-  padding: 100px;
+  padding: 10vw;
   text-align: center;
   background: #2f3136;
   border-radius: 10px;

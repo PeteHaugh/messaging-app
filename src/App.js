@@ -50,7 +50,7 @@ const AppLoading = styled.div`
 
 const AppLoadingContents = styled.div`
   text-align: center;
-  padding: 100px;
+  padding: 10vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
