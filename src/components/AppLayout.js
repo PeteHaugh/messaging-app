@@ -20,5 +20,5 @@ export default AppLayout;
 
 const AppBody = styled.div`
   display: flex;
-  height: calc(100vh - 61px);
+  height: calc(100vh - 60px);
 `;
