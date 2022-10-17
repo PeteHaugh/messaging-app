@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public/messaging-app-cf251",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
