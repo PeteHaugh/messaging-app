@@ -1,55 +1,98 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  HelpOutline,
+  Search,
+  Tag,
+  Inbox,
+  PeopleAlt,
+  PushPin,
+  NotificationsOff,
+} from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import SearchIcon from "@mui/icons-material/Search";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
+import { useSelector } from "react-redux";
+import { useDocument } from "react-firebase-hooks/firestore";
+import { db } from "../firebase";
+import { selectRoomId } from "../features/appSlice";
 
 function Header() {
   const [user] = useAuthState(auth);
+  const roomId = useSelector(selectRoomId);
+  const [roomDetails] = useDocument(
+    roomId && db.collection("rooms").doc(roomId)
+  );
 
   return (
-    <HeaderContainer>
-      {/* Nav */}
-      <HeaderLeft>
-        <HeaderAvatar onClick={() => auth.signOut()} src={user?.photoURL} alt={user?.displayName} />
-        <AccessTimeIcon />
-      </HeaderLeft>
+    <HeaderLayout>
+      <Spacer>Secret</Spacer>
+      <HeaderContainer>
+        {/* Nav */}
+        <HeaderLeft>
+          {roomId ? (
+            roomDetails && (
+              <div>
+                <Tag fontSize="small" />
+                {roomDetails?.data().name}
+              </div>
+            )
+          ) : (
+            <h3>
+              <strong>Select a room!</strong>
+            </h3>
+          )}
+        </HeaderLeft>
 
-      {/* Search */}
-      <HeaderSearch>
-        <SearchIcon />
-        <input placeholder="Search the chat"></input>
-      </HeaderSearch>
+        {/* Right */}
+        <HeaderRight>
+          <Tag />
+          <NotificationsOff />
+          <PushPin />
+          <PeopleAlt />
 
-      {/* Right */}
-      <HeaderRight>
-        <HelpOutlineIcon />
-      </HeaderRight>
-    </HeaderContainer>
+          <HeaderSearch>
+            <input placeholder="Search the chat"></input>
+            <Search />
+          </HeaderSearch>
+          <Inbox />
+          <HelpOutline sx={{ "&:hover": { color: "blue" } }} />
+        </HeaderRight>
+      </HeaderContainer>
+    </HeaderLayout>
   );
 }
 
 export default Header;
 
+const HeaderLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex: 0.7;
+  height: 60px;
+`;
+
+const Spacer = styled.div`
+  flex: 0.3;
+  max-width: 260px;
+  min-width: 100px;
+`;
+
 const HeaderSearch = styled.div`
-  flex: 0.4;
   opacity: 1;
   border-radius: 6px;
   background-color: #161618;
-  text-align: center;
+  text-align: left;
   display: flex;
-  padding: 0 50px;
+  padding: 0 10px;
   color: gray;
   border: 1px gray solid;
+  justify-content: space-between;
 
   > input {
     background-color: transparent;
     border: none;
-    text-align: center;
-    min-width: 30vw;
+    text-align: left;
     outline: 0;
     color: white;
   }
@@ -57,20 +100,29 @@ const HeaderSearch = styled.div`
 
 const HeaderContainer = styled.div`
   display: flex;
-  position: fixed;
+  flex: 0.7;
+  flex-grow: 1;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
-  background-color: var(--primary-color);
+  background-color: #36393F;
   color: white;
+  z-index: 1;
+  border-bottom: 1px solid #2E3036;
 `;
 
 const HeaderLeft = styled.div`
-  flex: 0.3;
   display: flex;
   align-items: center;
   margin-left: 20px;
+
+  > div {
+    display: flex;
+    font-weight: 700;
+    align-items: center;
+    text-overflow: ellipsis;
+  }
 
   > .MuiSvgIcon-root {
     margin-left: auto;
@@ -86,12 +138,19 @@ const HeaderAvatar = styled(Avatar)`
 `;
 
 const HeaderRight = styled.div`
-  flex: 0.3;
+  flex: 0.2;
   display: flex;
   align-items: flex-end;
+  margin-right: 20px;
 
   > .MuiSvgIcon-root {
     margin-left: auto;
-    margin-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #B8BABD;
+
+    &:hover {
+      color: whitesmoke;
+    }
   }
 `;

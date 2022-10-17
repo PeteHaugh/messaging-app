@@ -4,7 +4,7 @@
 
 body {
 
-  --primary-color: #212124;
+  --primary-color: #2F3136;
 
 
   margin: 0;
@@ -13,6 +13,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+}
+
+::-webkit-scrollbar-track {
+  background: red;
 }
 
 code {

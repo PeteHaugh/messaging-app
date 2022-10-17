@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { db } from "../firebase";
 import { enterRoom } from "../features/appSlice";
+import { Tag } from "@mui/icons-material";
 
 function SidebarOption({ Icon, title, addChannelOption, id }) {
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ function SidebarOption({ Icon, title, addChannelOption, id }) {
         <h3>{title}</h3>
       ) : (
         <SidebarOptionChannel>
-          <span>#</span> {title}
+          <span>
+            <Tag fontSize="small" />
+          </span>{" "}
+          {title}
         </SidebarOptionChannel>
       )}
     </SidebarOptionContainer>
@@ -61,11 +65,15 @@ const SidebarOptionContainer = styled.div`
   }
 
   > h3 > span {
-    padding: 15px;
+    padding-right: 5px;
+    padding-left: 30px;
   }
 `;
 
 const SidebarOptionChannel = styled.h3`
   padding: 10px 0;
   font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;

@@ -15,6 +15,7 @@ function Chat() {
   const [roomDetails] = useDocument(
     roomId && db.collection("rooms").doc(roomId)
   );
+
   const [roomMessages, loading] = useCollection(
     roomId &&
       db
@@ -32,61 +33,30 @@ function Chat() {
 
   return (
     <ChatContainer>
-      {roomId ? (
-        roomDetails &&
-        roomMessages && (
-          <>
-            <Header>
-              <HeaderLeft>
-                <h4>
-                  <strong>#{roomDetails?.data().name}</strong>
-                </h4>
-                <StarBorderOutlined />
-              </HeaderLeft>
+      {roomDetails && roomMessages && (
+        <>
+          <ChatMessages>
+            {roomMessages?.docs.map((doc) => {
+              const { message, timestamp, user, userImage } = doc.data();
 
-              <HeaderRight>
-                <p>
-                  <InfoOutlined /> Details
-                </p>
-              </HeaderRight>
-            </Header>
-            <ChatMessages>
-              {roomMessages?.docs.map((doc) => {
-                const { message, timestamp, user, userImage } = doc.data();
-
-                return (
-                  <Message
-                    key={doc.id}
-                    message={message}
-                    timestamp={timestamp}
-                    user={user}
-                    userImage={userImage}
-                  />
-                );
-              })}
-              <ChatBottom ref={chatRef} />
-            </ChatMessages>
-            <ChatInput
-              chatRef={chatRef}
-              channelId={roomId}
-              channelName={roomDetails?.data().name}
-            />
-          </>
-        )
-      ) : (
-        <Header>
-          <HeaderLeft>
-            <h3>
-              <strong>Select a room!</strong>
-            </h3>
-          </HeaderLeft>
-
-          <HeaderRight>
-            <p>
-              <InfoOutlined /> Details
-            </p>
-          </HeaderRight>
-        </Header>
+              return (
+                <Message
+                  key={doc.id}
+                  message={message}
+                  timestamp={timestamp}
+                  user={user}
+                  userImage={userImage}
+                />
+              );
+            })}
+            <ChatBottom ref={chatRef} />
+          </ChatMessages>
+          <ChatInput
+            chatRef={chatRef}
+            channelId={roomId}
+            channelName={roomDetails?.data().name}
+          />
+        </>
       )}
     </ChatContainer>
   );
@@ -140,5 +110,25 @@ const ChatContainer = styled.div`
   flex: 0.7;
   flex-grow: 1;
   overflow-y: scroll;
-  margin-top: 60px;
+  background-color: #36393f;
+  color: #dddedf;
+  ::-webkit-scrollbar {
+    background-color: gray;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #36393f;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2f3136;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b8babd;
+  }
 `;

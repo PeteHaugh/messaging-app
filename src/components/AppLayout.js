@@ -10,7 +10,7 @@ function AppLayout() {
       <Header />
       <AppBody>
         <Sidebar />
-          <Outlet />
+        <Outlet />
       </AppBody>
     </>
   );
@@ -20,6 +20,5 @@ export default AppLayout;
 
 const AppBody = styled.div`
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 61px);
 `;
-
